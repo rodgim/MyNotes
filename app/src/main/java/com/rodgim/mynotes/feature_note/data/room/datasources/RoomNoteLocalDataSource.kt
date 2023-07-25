@@ -7,9 +7,8 @@ import com.rodgim.mynotes.feature_note.data.room.mappers.toEntity
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class RoomNoteLocalDataSource @Inject constructor(
+class RoomNoteLocalDataSource(
     private val noteDao: NoteDao
 ) : NoteLocalDataSource {
     override fun getNotes(): Flow<List<Note>> {
