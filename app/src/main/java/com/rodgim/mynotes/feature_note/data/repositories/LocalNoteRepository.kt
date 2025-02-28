@@ -1,6 +1,6 @@
 package com.rodgim.mynotes.feature_note.data.repositories
 
-import com.rodgim.mynotes.feature_note.data.datasources.NoteLocalDataSource
+import com.rodgim.mynotes.feature_note.data.source.NoteLocalDataSource
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import com.rodgim.mynotes.feature_note.domain.repositories.NoteRepository
 import kotlinx.coroutines.flow.Flow

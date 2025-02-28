@@ -2,7 +2,7 @@ package com.rodgim.mynotes.di
 
 import android.content.Context
 import androidx.room.Room
-import com.rodgim.mynotes.feature_note.data.datasources.NoteLocalDataSource
+import com.rodgim.mynotes.feature_note.data.source.NoteLocalDataSource
 import com.rodgim.mynotes.feature_note.data.repositories.LocalNoteRepository
 import com.rodgim.mynotes.feature_note.data.room.NoteDao
 import com.rodgim.mynotes.feature_note.data.room.NoteDatabase

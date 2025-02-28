@@ -1,9 +1,9 @@
 package com.rodgim.mynotes.feature_note.data.room.datasources
 
-import com.rodgim.mynotes.feature_note.data.datasources.NoteLocalDataSource
+import com.rodgim.mynotes.feature_note.data.source.NoteLocalDataSource
 import com.rodgim.mynotes.feature_note.data.room.NoteDao
-import com.rodgim.mynotes.feature_note.data.room.mappers.toDomain
-import com.rodgim.mynotes.feature_note.data.room.mappers.toEntity
+import com.rodgim.mynotes.feature_note.data.mappers.toDomain
+import com.rodgim.mynotes.feature_note.data.mappers.toEntity
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

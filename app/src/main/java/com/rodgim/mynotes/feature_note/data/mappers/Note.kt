@@ -1,4 +1,4 @@
-package com.rodgim.mynotes.feature_note.data.room.mappers
+package com.rodgim.mynotes.feature_note.data.mappers
 
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import com.rodgim.mynotes.feature_note.data.room.entities.Note as NoteEntity

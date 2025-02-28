@@ -1,4 +1,4 @@
-package com.rodgim.mynotes.feature_note.data.datasources
+package com.rodgim.mynotes.feature_note.data.source
 
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import kotlinx.coroutines.flow.Flow
