@@ -17,29 +17,25 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color.White,
-    background = DarkGray,
-    onBackground = Color.White,
-    surface = LightBlue,
-    onSurface = DarkGray
+    primary = PrimaryYellow,
+    secondary = PrimaryLightYellow,
+    background = BackgroundDark,
+    surface = SurfaceDark,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black,
+    onBackground = PrimaryTextDark,
+    onSurface = PrimaryTextDark
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color.White,
-    background = DarkGray,
-    onBackground = Color.White,
-    surface = LightBlue,
-    onSurface = DarkGray
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = PrimaryYellow,
+    secondary = PrimaryDarkYellow,
+    background = BackgroundLight,
+    surface = SurfaceLight,
+    onPrimary = Color.Black,
+    onSecondary = Color.Black,
+    onBackground = PrimaryTextLight,
+    onSurface = PrimaryTextLight
 )
 
 @Composable
@@ -57,14 +53,6 @@ fun MyNotesTheme(
 
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
-    }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
-        }
     }
 
     MaterialTheme(
