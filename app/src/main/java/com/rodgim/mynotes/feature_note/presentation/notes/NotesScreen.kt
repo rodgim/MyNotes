@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sort
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,17 +38,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.rodgim.mynotes.core.utils.TestTags
+import com.rodgim.mynotes.feature_note.domain.models.Note
 import com.rodgim.mynotes.feature_note.presentation.notes.components.NoteItem
 import com.rodgim.mynotes.feature_note.presentation.notes.components.OrderSection
-import com.rodgim.mynotes.feature_note.presentation.utils.Screen
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesScreen(
-    navController: NavController,
+    onAddNote: () -> Unit,
+    onUpdate: (Note) -> Unit,
     viewModel: NotesViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.value
@@ -60,7 +58,7 @@ fun NotesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.AddEditNoteScreen.route)
+                    onAddNote()
                 },
                 containerColor = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(16.dp)
@@ -120,10 +118,7 @@ fun NotesScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                navController.navigate(
-                                    Screen.AddEditNoteScreen.route +
-                                            "?noteId=${note.id}&noteColor=${note.color}"
-                                )
+                                onUpdate(note)
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))

@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Save
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,17 +37,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.rodgim.mynotes.core.utils.TestTags
 import com.rodgim.mynotes.feature_note.presentation.add_edit_note.components.TransparentHintTextField
 import com.rodgim.mynotes.feature_note.presentation.utils.noteColors
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditNoteScreen(
-    navController: NavController,
+    onSaveNote: () -> Unit,
     noteColor: Int,
     viewModel: AddEditNoteViewModel = hiltViewModel(),
 ) {
@@ -74,7 +71,7 @@ fun AddEditNoteScreen(
                 }
 
                 AddEditNoteViewModel.UiEvent.SaveNote -> {
-                    navController.navigateUp()
+                    onSaveNote()
                 }
             }
         }
