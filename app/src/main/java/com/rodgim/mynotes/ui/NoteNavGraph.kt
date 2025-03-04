@@ -36,7 +36,7 @@ fun NoteNavGraph(
         ) {
             NotesScreen(
                 onAddNote = { navActions.navigateToAddEditNote(null, null) },
-                onUpdate = { note ->
+                onClickNote = { note ->
                     navActions.navigateToAddEditNote(noteId = note.id, note.color)
                 }
             )
