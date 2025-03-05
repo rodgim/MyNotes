@@ -20,7 +20,7 @@ roomKtx = "2.6.1"
 test-runner = "1.6.2"
 truth = "1.4.4"
 
-androidGradlePlugin = "8.8.2"
+androidGradlePlugin = "8.9.0"
 devToolsKspVersion = "2.1.0-1.0.29"
 kotlinAndroid = "2.1.0"
 hiltAndroid = "2.53.1"

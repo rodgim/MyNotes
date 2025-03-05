@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.rodgim.mynotes.R
 import com.rodgim.mynotes.feature_note.presentation.add_edit_note.AddEditNoteScreen
 import com.rodgim.mynotes.feature_note.presentation.notes.NotesScreen
 import com.rodgim.mynotes.ui.NoteDestinationsArgs.NOTE_COLOR_ARG
 import com.rodgim.mynotes.ui.NoteDestinationsArgs.NOTE_ID_ARG
+import com.rodgim.mynotes.ui.NoteDestinationsArgs.TITLE_ARG
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -35,9 +37,9 @@ fun NoteNavGraph(
             NoteDestinations.NOTES_ROUTE
         ) {
             NotesScreen(
-                onAddNote = { navActions.navigateToAddEditNote(null, null) },
+                onAddNote = { navActions.navigateToAddEditNote(R.string.new_note, null, null) },
                 onClickNote = { note ->
-                    navActions.navigateToAddEditNote(noteId = note.id, note.color)
+                    navActions.navigateToAddEditNote(R.string.edit_note, note.id, note.color)
                 }
             )
         }
@@ -45,6 +47,10 @@ fun NoteNavGraph(
         composable(
             NoteDestinations.ADD_EDIT_NOTE_ROUTE,
             arguments = listOf(
+                navArgument(TITLE_ARG) {
+                    type = NavType.IntType
+                },
+
                 navArgument(NOTE_ID_ARG) {
                     type = NavType.IntType
                     defaultValue = -1
@@ -56,8 +62,10 @@ fun NoteNavGraph(
             )
         ) { entry ->
             AddEditNoteScreen(
+                topBarTitle = entry.arguments?.getInt(TITLE_ARG)!!,
+                onBack = { navController.popBackStack() },
                 onSaveNote = { navActions.navigateToNotes() },
-                noteColor = entry.arguments?.getInt(NOTE_COLOR_ARG) ?: -1
+                noteColor = entry.arguments?.getInt(NOTE_COLOR_ARG)!!
             )
         }
     }

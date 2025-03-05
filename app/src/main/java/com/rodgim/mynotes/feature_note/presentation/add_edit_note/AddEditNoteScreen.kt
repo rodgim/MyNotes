@@ -1,5 +1,6 @@
 package com.rodgim.mynotes.feature_note.presentation.add_edit_note
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -41,11 +42,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rodgim.mynotes.core.utils.TestTags
 import com.rodgim.mynotes.feature_note.presentation.add_edit_note.components.TransparentHintTextField
 import com.rodgim.mynotes.feature_note.presentation.utils.noteColors
+import com.rodgim.mynotes.ui.AddEditNoteTopAppBar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
 fun AddEditNoteScreen(
+    @StringRes topBarTitle: Int,
+    onBack: () -> Unit,
     onSaveNote: () -> Unit,
     noteColor: Int,
     viewModel: AddEditNoteViewModel = hiltViewModel(),
@@ -79,6 +83,11 @@ fun AddEditNoteScreen(
     }
 
     Scaffold(
+        topBar = {
+            AddEditNoteTopAppBar(topBarTitle) {
+                onBack()
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
