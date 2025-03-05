@@ -14,6 +14,7 @@ import com.rodgim.mynotes.feature_note.domain.usecases.DeleteNoteUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.GetNoteUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.GetNotesUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.NoteUseCases
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,11 +56,14 @@ object AppModule {
     fun provideNoteRepository(localDataSource: NoteLocalDataSource): NoteRepository {
         return LocalNoteRepository(localDataSource)
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataSourceModule {
 
     @Singleton
-    @Provides
-    fun provideNoteLocalDataSource(
-        noteDao: NoteDao
-    ): NoteLocalDataSource = RoomNoteLocalDataSource(noteDao)
+    @Binds
+    abstract fun bindLocalDataSource(roomNoteLocalDataSource: RoomNoteLocalDataSource): NoteLocalDataSource
 
 }
