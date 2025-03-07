@@ -2,17 +2,17 @@ package com.rodgim.mynotes.di
 
 import android.content.Context
 import androidx.room.Room
-import com.rodgim.mynotes.feature_note.data.source.NoteLocalDataSource
 import com.rodgim.mynotes.feature_note.data.repositories.LocalNoteRepository
-import com.rodgim.mynotes.feature_note.data.room.NoteDao
 import com.rodgim.mynotes.feature_note.data.room.NoteDatabase
 import com.rodgim.mynotes.feature_note.data.room.datasources.RoomNoteLocalDataSource
+import com.rodgim.mynotes.feature_note.data.source.NoteLocalDataSource
 import com.rodgim.mynotes.feature_note.domain.repositories.NoteRepository
 import com.rodgim.mynotes.feature_note.domain.usecases.AddNoteUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.DeleteNoteUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.GetNoteUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.GetNotesUseCase
 import com.rodgim.mynotes.feature_note.domain.usecases.NoteUseCases
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,10 +53,14 @@ object TestAppModule {
     fun provideNoteRepository(localDataSource: NoteLocalDataSource): NoteRepository {
         return LocalNoteRepository(localDataSource)
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataSourceModule {
 
     @Singleton
-    @Provides
-    fun provideNoteLocalDataSource(
-        noteDao: NoteDao
-    ): NoteLocalDataSource = RoomNoteLocalDataSource(noteDao)
+    @Binds
+    abstract fun bindLocalDataSource(roomNoteLocalDataSource: RoomNoteLocalDataSource): NoteLocalDataSource
+
 }

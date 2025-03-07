@@ -24,4 +24,28 @@ class FakeNoteRepository : NoteRepository {
     override suspend fun deleteNote(note: Note) {
         notes.remove(note)
     }
+
+    fun getNoteWithCorrectData() = Note(
+        id = 0,
+        title = "Test",
+        content = "Description",
+        timestamp = 1741352474,
+        color = 1
+    )
+
+    fun getNoteWithEmptyTitle() = Note(
+        id = 0,
+        title = "",
+        content = "Description",
+        timestamp = 1741352474,
+        color = 1
+    )
+
+    fun getNoteWithEmptyContent() = Note(
+        id = 0,
+        title = "Test",
+        content = "",
+        timestamp = 1741352474,
+        color = 1
+    )
 }

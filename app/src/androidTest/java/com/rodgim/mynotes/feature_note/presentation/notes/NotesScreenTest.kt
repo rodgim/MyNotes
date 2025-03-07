@@ -6,13 +6,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.rodgim.mynotes.core.utils.TestTags
 import com.rodgim.mynotes.di.AppModule
 import com.rodgim.mynotes.feature_note.presentation.MainActivity
-import com.rodgim.mynotes.feature_note.presentation.utils.Screen
+import com.rodgim.mynotes.ui.NoteNavGraph
 import com.rodgim.mynotes.ui.theme.MyNotesTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -36,12 +33,7 @@ class NotesScreenTest {
         hiltRule.inject()
         composeRule.activity.setContent {
             MyNotesTheme {
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Screen.NotesScreen.route) {
-                    composable(route = Screen.NotesScreen.route) {
-                        NotesScreen(navController = navController)
-                    }
-                }
+                NoteNavGraph()
             }
         }
     }
