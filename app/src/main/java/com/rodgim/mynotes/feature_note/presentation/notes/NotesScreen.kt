@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rodgim.mynotes.core.utils.TestTags
 import com.rodgim.mynotes.feature_note.domain.models.Note
 import com.rodgim.mynotes.feature_note.domain.utils.NoteOrder
@@ -46,7 +47,7 @@ fun NotesScreen(
     onClickNote: (Note) -> Unit,
     viewModel: NotesViewModel = hiltViewModel(),
 ) {
-    val state = viewModel.state.value
+    val state = viewModel.state.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
@@ -75,9 +76,9 @@ fun NotesScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { padding ->
         NotesContent(
-            notes = state.notes,
-            isOrderSectionVisible = state.isOrderSectionVisible,
-            noteOrder = state.noteOrder,
+            notes = state.value.notes,
+            isOrderSectionVisible = state.value.isOrderSectionVisible,
+            noteOrder = state.value.noteOrder,
             onClickNote = { note ->
                 onClickNote(note)
             },
@@ -117,24 +118,6 @@ fun NotesContent(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        /*Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Your note",
-                style = MaterialTheme.typography.headlineMedium
-            )
-            IconButton(
-                onClick = { viewModel.onEvent(NotesEvent.ToggleOrderSection) }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Sort,
-                    contentDescription = "Sort"
-                )
-            }
-        }*/
         AnimatedVisibility(
             visible = isOrderSectionVisible,
             enter = fadeIn() + slideInVertically(),
