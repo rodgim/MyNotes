@@ -30,7 +30,7 @@ class FakeNoteRepository : NoteRepository {
         title = "Test",
         content = "Description",
         timestamp = 1741352474,
-        color = 1
+        color = -21615
     )
 
     fun getNoteWithEmptyTitle() = Note(
@@ -38,7 +38,7 @@ class FakeNoteRepository : NoteRepository {
         title = "",
         content = "Description",
         timestamp = 1741352474,
-        color = 1
+        color = -21615
     )
 
     fun getNoteWithEmptyContent() = Note(
@@ -46,6 +46,10 @@ class FakeNoteRepository : NoteRepository {
         title = "Test",
         content = "",
         timestamp = 1741352474,
-        color = 1
+        color = -21615
     )
+
+    fun addNotes(vararg note: Note) {
+        notes.addAll(note)
+    }
 }
